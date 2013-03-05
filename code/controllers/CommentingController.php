@@ -360,7 +360,7 @@ class CommentingController extends Controller {
 	public function doPostComment($data, $form) {
 		$class = (isset($data['BaseClass'])) ? $data['BaseClass'] : $this->getBaseClass();
 		$usePreview = Commenting::get_config_value($class, 'use_preview');
-		$isPreview = ($usePreview && isset($data['preview']) && $data['preview']);
+		$isPreview = ($usePreview && isset($data['IsPreview']) && $data['IsPreview']);
 		
 		// if no class then we cannot work out what controller or model they
 		// are on so throw an error
