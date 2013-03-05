@@ -412,18 +412,10 @@ class CommentingController extends Controller {
 		
 		// clear the users comment since it passed validation
 		Cookie::set('CommentsForm_Comment', false);
-		
-		if(Director::is_ajax()) {
-			if(!$comment->Moderated) {
-				return $comment->renderWith('CommentsInterface_pendingcomment');
-			} else {
-				return $comment->renderWith('CommentsInterface_singlecomment');
-			}
-		}
 
 		$holder = Commenting::get_config_value($comment->BaseClass, 'comments_holder_id');
 
-		$hash = ($moderated) ? $comment->Permalink() : $holder;
+		$hash = ($moderated) ? $holder : $comment->Permalink();
 		$url = (isset($data['ReturnURL'])) ? $data['ReturnURL'] : false;
 			
 		return ($url) ? $this->redirect($url .'#'. $hash) : $this->redirectBack();
